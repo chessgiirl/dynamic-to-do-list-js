@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
    *   set onclick to remove the li from taskList, append the button to li,
    *   append li to taskList, and clear the input.
    */
-  function addTask() {
+  function addTask(event) {
+    // Prevent default form submission if triggered by Enter key
+    if (event) event.preventDefault();
+
     // Retrieve and trim value from input
     const taskText = taskInput.value.trim();
 
@@ -34,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Assign onclick to remove the li element from taskList
     removeBtn.onclick = function () {
-      // Remove li from the parent taskList
       taskList.removeChild(li);
     };
 
@@ -52,10 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Attach event listener to taskInput for 'keypress' to add task on Enter key
   taskInput.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
-      addTask();
+      addTask(event);
     }
   });
-
-  // Note: The spec asked to place all code inside DOMContentLoaded callback,
-  // which we have done above.
 });
