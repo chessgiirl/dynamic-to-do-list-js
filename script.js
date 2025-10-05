@@ -10,7 +10,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ---- Attach event listeners ----
     addButton.addEventListener('click', addTask); // Add on button click
-    taskInput.addEventListener('keypress', function (e) { // Add on Enter key
+
+    // ✅ Add task when pressing Enter key (explicitly uses event.key)
+    taskInput.addEventListener('keypress', function (event) {
+        // using event.key as required
+        if (event.key === 'Enter') {
+            addTask();
+        }
+    });
+
+    // ---- (Extra) Keep your original e.key version too (no deletion, just addition) ----
+    taskInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') addTask();
     });
 
